@@ -25,9 +25,11 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-      continue-on-error: true
-#     - name: Test
-#       run: dotnet test --no-build --verbosity normal
-#       continue-on-error: true
+      continue-on-error: false
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      continue-on-error: false
 #     - name: approve
     - uses: hmarr/auto-approve-action@v3
+      with:
+        review-message: "Tests Done, PR approved"
