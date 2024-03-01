@@ -37,7 +37,8 @@ public class Tests : BaseTest
 
         // Assert
         App.GetScreenshot().SaveAsFile($"{nameof(ClickAccountButtonTest)}.png");
-        //Assert.That(element.Text, Is.EqualTo("Clicked 1 time"));
-        Assert.True(true);
+        var element2 = FindUIElement("TitleLabel");
+
+        Assert.That(element2.Text, Is.EqualTo("Account"));
     }
 }
