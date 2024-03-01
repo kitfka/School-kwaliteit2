@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Webshop.ViewModel;assembly=Webshop"
+             x:Class="Webshop.Maui.Pages.ProductListPage"
+             xmlns:view="clr-namespace:Webshop.Maui.Views"
+             x:DataType="vm:ProductListViewModel"
+             Title="Product List"
+             >
+
+    <ScrollView>
+        <Grid
+            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="{OnIdiom '0,*,0', Desktop='*,4*,*'}"
+            Margin="10">
+        
+            <SearchBar 
+                Grid.Column="1"
+                x:Name="Search"
+                Text="{Binding Search}"
+                Grid.Row="0"
+                Placeholder="Search products!"  />
+
+            <VerticalStackLayout
+                Grid.Column="1"
+                Spacing="10"
+                x:Name="ProductList"
+                Grid.Row="1">
+
+                <view:ProductView
+                    Price="12"
+                    ImageSource="img20231011120336.jpg"
+                    CardTitle="test"
+                    Description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus viverra vitae congue eu consequat. Tortor vitae purus faucibus ornare suspendisse sed nisi. Posuere morbi leo urna molestie. Nunc mattis enim ut tellus elementum sagittis vitae et. Quis auctor elit sed vulputate mi sit amet mauris. Quis varius quam quisque id diam vel."
+                />
+                <view:ProductView 
+                    CardTitle="test2" 
+                    Description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus viverra vitae congue eu consequat. Tortor vitae purus faucibus ornare suspendisse sed nisi. Posuere morbi leo urna molestie. Nunc mattis enim ut tellus elementum sagittis vitae et. Quis auctor elit sed vulputate mi sit amet mauris. Quis varius quam quisque id diam vel."
+                    />
+                <view:ProductView 
+                    CardTitle="test3"
+                    Description="Lacus viverra vitae congue eu consequat. Tortor vitae purus faucibus ornare suspendisse sed nisi. Posuere morbi leo urna molestie. Nunc mattis enim ut tellus elementum sagittis vitae et. Quis auctor elit sed vulputate mi sit amet mauris. Quis varius quam quisque id diam vel."
+                                  />
+
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

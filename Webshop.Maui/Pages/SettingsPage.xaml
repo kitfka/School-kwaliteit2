@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Webshop.Model;assembly=Webshop"
+             xmlns:data="clr-namespace:Webshop.Data;assembly=Webshop"
+             x:Class="Webshop.Maui.Pages.SettingsPage"
+             xmlns:local="clr-namespace:Webshop.ViewModel;assembly=Webshop"
+             x:DataType="local:ConfigViewModel"
+             Title="Settings Page">
+
+    <Shell.NavBarIsVisible>
+        <x:Boolean>True</x:Boolean>
+    </Shell.NavBarIsVisible>
+    
+             <!--x:DataType="local.core:MainViewModel"-->
+    <VerticalStackLayout>
+        <Label 
+            Text="Settings page!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Orientation="Horizontal">
+            <Switch x:Name="SwitchTest" OnColor="{DynamicResource Primary}" IsToggled="{Binding TestBool}" />
+            <Label VerticalOptions="Center" Text="Test switch" />
+        </StackLayout>
+
+        <Picker
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            SelectedItem="{Binding UITheme}"
+            SelectedIndexChanged="Picker_SelectedIndexChanged"
+            Title="Application Theme"
+            >
+            
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type model:UITheme}">
+                    <model:UITheme>Unspecified</model:UITheme>
+                    <model:UITheme>Dark</model:UITheme>
+                    <model:UITheme>Light</model:UITheme>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Picker
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            SelectedItem="{Binding BaseUrlOption}"
+            Title="What api to use!"
+            >
+
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type data:BaseUrlOption}">
+                    <data:BaseUrlOption>Unspecified</data:BaseUrlOption>
+                    <data:BaseUrlOption>Local</data:BaseUrlOption>
+                    <data:BaseUrlOption>VM</data:BaseUrlOption>
+                    <data:BaseUrlOption>Online</data:BaseUrlOption>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+    </VerticalStackLayout>
+</ContentPage>

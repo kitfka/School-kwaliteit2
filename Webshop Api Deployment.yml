@@ -1,0 +1,88 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  name: default
+  vmImage: 'windows-latest'
+
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  DotNetVersion: '8.0.100'
+
+steps:
+- task: UseDotNet@2
+  displayName: .NET Version
+  inputs:
+    packageType: 'sdk'
+    version: '$(DotNetVersion)'
+
+# Would work if the thing is missing the sdk we need
+# - task: CmdLine@2
+#   displayName: Install MAUI
+#   inputs:
+#     script: |
+#       dotnet nuget locals all --clear 
+#       dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+#       dotnet workload install android ios maccatalyst tvos macos maui wasm-tools --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'Webshop VM'
+    runOptions: 'commands'
+    commands: |
+      systemctl stop Webshop.Api.service
+    readyTimeout: '20000'
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+
+- task: DotNetCoreCLI@2
+  continueOnError: true
+  inputs:
+    command: 'build'
+    projects: '**/Webshop.Api.csproj'
+    arguments: '-c Release --os linux -o ./artifacts'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: './artifacts'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'Webshop VM'
+    sourceFolder: './artifacts'
+    contents: '**'
+    targetFolder: '/root/test'
+    readyTimeout: '20000'
+    cleanTargetFolder: true
+
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'Webshop VM'
+    runOptions: 'commands'
+    commands: |
+      cd /root
+      ./server.sh
+      systemctl start Webshop.Api.service
+    readyTimeout: '20000'

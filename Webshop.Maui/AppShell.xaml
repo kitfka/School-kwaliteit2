@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Webshop.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Webshop.Maui"
+    xmlns:pages="clr-namespace:Webshop.Maui.Pages"
+    Title="Webshop"
+    Shell.FlyoutBehavior="Flyout">
+    <!--https://stackoverflow.com/questions/75257860/net-maui-customize-shell-titleview-and-bind-to-current-page-title-->
+    <!--xmlns:views="clr-namespace:Webshop.Maui.Views"-->
+
+    
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="{OnIdiom Desktop='*,100,100', Default='*,0,0'}">
+            <Button IsVisible="{OnIdiom Default='false', Desktop='true'}" Text="Home" Clicked="Button3_Clicked" HeightRequest="48" WidthRequest="120" HorizontalOptions="StartAndExpand" FontSize="Large" />
+            <Label  IsVisible="{OnIdiom Default='true', Desktop='false'}" VerticalOptions="Center" Padding="10,0,0,0" x:Name="TitleLabel" Text="Webshop" FontSize="Title" TextColor="{DynamicResource White}" />
+            <Button IsVisible="{OnIdiom Default='false', Desktop='true'}" Grid.Column="1" Text="Cart" Clicked="Button2_Clicked" HeightRequest="30" WidthRequest="80" HorizontalOptions="End" />
+            <Button IsVisible="{OnIdiom Default='false', Desktop='true'}" Grid.Column="2" Text="Account" Clicked="Button_Clicked" HeightRequest="30" WidthRequest="100" HorizontalOptions="End" AutomationId="AccountButton" />
+        </Grid>
+    </Shell.TitleView>
+
+
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <ShellContent
+            
+                Title="Home"
+                ContentTemplate="{DataTemplate pages:ProductListPage}"
+                Route="ProductListPage" />
+        
+        <ShellContent
+                Title="Order page"
+                ContentTemplate="{DataTemplate pages:OrderPage}"
+                Route="OrderPage" />
+        <ShellContent
+                Title="Cart"
+                ContentTemplate="{DataTemplate pages:CartPage}"
+                Route="CartPage" />
+    </FlyoutItem>
+
+    <ShellContent
+                x:Name="VerkoperShellContent"
+                IsVisible="False"
+                Title="Verkoper"
+                ContentTemplate="{DataTemplate pages:VerkoperPage}"
+                Route="VerkoperPage" />
+    
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        <!--<ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="MainPage" />-->
+        
+
+            <ShellContent
+                Title="User"
+                ContentTemplate="{DataTemplate pages:UserPage}"
+                Route="UserPage" />
+            <ShellContent
+                Title="Settings"
+                ContentTemplate="{DataTemplate pages:SettingsPage}"
+                Route="SettingsPage" />
+
+            <ShellContent
+                Title="Web Test"
+                ContentTemplate="{DataTemplate pages:SpikeWebPage}"
+                Route="SpikeWebPage" />
+  
+    </FlyoutItem>
+
+</Shell>

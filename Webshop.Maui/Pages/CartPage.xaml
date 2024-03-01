@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Webshop.ViewModel;assembly=Webshop"
+             x:DataType="vm:CartViewModel"
+             x:Class="Webshop.Maui.Pages.CartPage"
+             Title="Cart Page">
+    <VerticalStackLayout
+        
+        Margin="{OnIdiom '0,0,0,0', Desktop='300,0,300,0'}"
+        
+        
+        >
+        <Button 
+            Text="Order products"
+            x:Name="OrderButton"
+            Clicked="OrderButton_Clicked"
+            />
+        
+        <HorizontalStackLayout>
+            <Label Text="Total: € "/>
+            <Label Text="{Binding TotalPrice}"/>
+        </HorizontalStackLayout>
+
+        <Frame
+            BorderColor="{DynamicResource Tertiary}"
+            >
+            
+        <VerticalStackLayout
+            x:Name="CartList"
+            >
+      
+        </VerticalStackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Webshop.Maui.Pages.ProductPage"
+             xmlns:local="clr-namespace:Webshop.ViewModel;assembly=Webshop"
+             x:DataType="local:ProductViewModel"
+             Title="Product Page">
+    <ScrollView>
+        <Grid
+            ColumnDefinitions="{OnIdiom '0,*,0', Desktop='*,4*,*'}"
+            >
+
+            <VerticalStackLayout Grid.Column="1">
+
+                <Button Text="Go Back" Clicked="Button_Clicked" HorizontalOptions="Start" />
+
+                <Label FontSize="Title" Text="{Binding Product.Name}" />
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="500,100"
+                    >
+                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" x:Name="VariantList">
+                    
+                        </HorizontalStackLayout>
+                    <Image
+                        Source="{Binding Product.ImageSource}" />
+            
+                    <VerticalStackLayout Grid.Column="1">
+
+
+                        <Button Text="Add to Cart" x:Name="CartButton" Clicked="CartButton_Clicked" />
+
+                        <HorizontalStackLayout>
+                            <Label Text="Price: €" Padding="0,0,1,0"/>
+                            <Label Text="{Binding Product.Price}" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout>
+                            <Label Text="Stock:" Padding="0,0,5,0"/>
+                            <Label Text="{Binding Product.Stock}" />
+                        </HorizontalStackLayout>
+                        
+                        
+                        
+                        <Label Text="Description:" />
+                        <Label
+                            LineBreakMode="WordWrap"
+                            MaxLines="8"
+                            VerticalOptions="Fill"
+                            HorizontalOptions="Fill"
+                            Text="{Binding Product.Description}"
+                            />
+
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

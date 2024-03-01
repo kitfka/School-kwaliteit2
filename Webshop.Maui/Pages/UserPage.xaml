@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Webshop.Maui.Pages.UserPage"
+             xmlns:vm="clr-namespace:Webshop.ViewModel;assembly=Webshop"
+             x:DataType="vm:UserViewModel"
+             Title="User Page">
+    
+    
+    <VerticalStackLayout
+        Margin="{OnIdiom '0,0,0,0', Desktop='300,0,300,0'}"
+        >
+        
+        
+        <Label 
+            IsVisible="{Binding NotLoggedIn}"
+            Text="Login"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" />
+        
+        <!--<Label 
+            IsVisible="{Binding ShowRegister}"
+            Text="Register"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" />-->
+        
+        <Entry
+            IsVisible="{Binding NotLoggedIn}"
+            Placeholder="E-mail"
+            Text="{Binding UserName}"
+            />
+        <Entry
+            IsVisible="{Binding NotLoggedIn}"
+            Placeholder="Password"
+            IsPassword="True"
+            Text="{Binding Password}"
+            />
+        <Button 
+            IsVisible="{Binding NotLoggedIn}"
+            Text="Register instead" 
+            x:Name="RegisterButton"
+            MaximumWidthRequest="200"    
+            HorizontalOptions="Start"
+            Clicked="RegisterButton_Clicked"
+                />
+        
+        <Button 
+            IsVisible="{Binding NotLoggedIn}"
+            Text="Login" 
+            MaximumWidthRequest="100"
+            HorizontalOptions="Start"
+            Clicked="Button_Clicked"
+                />
+
+        <Button
+            IsVisible="{Binding LoggedIn}"
+            Text="Logout"
+            MaximumWidthRequest="100"
+            HorizontalOptions="Start"
+            x:Name="LogoutButton"
+            Clicked="LogoutButton_Clicked"
+            />
+    </VerticalStackLayout>
+</ContentPage>

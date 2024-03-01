@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="this"
+             x:Class="Webshop.Maui.Views.ProductView">
+
+        <!--IsClippedToBounds="True"-->
+    <Frame
+        BindingContext="{x:Reference this}"
+        BackgroundColor="{DynamicResource White}"
+        BorderColor="{DynamicResource Tertiary}"
+        >
+
+        <Grid
+            ColumnDefinitions="*,3*"
+            >
+            
+            <ImageButton
+                Grid.Column="0"
+                x:Name="ProductImageButton"
+                Source="{Binding ImageSource}"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                Clicked="ProductImageButton_Clicked"
+                HorizontalOptions="Center" />
+
+            <Grid
+                Grid.Column="1"
+                Margin="16,16,16,16"
+                RowDefinitions="Auto,Auto"
+                ColumnDefinitions="*,100"
+                >
+                <Label 
+                    FontSize="Title"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Text="{Binding CardTitle, FallbackValue='asd'}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start" />
+
+                <!-- BUG, wordwrap not updating in this setup, reload page will fix it...-->
+                <Label 
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Text="{Binding Description}"
+                    LineBreakMode="WordWrap"
+                    MaxLines="6"
+                    
+                    VerticalTextAlignment="Start"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    />
+                    <!--WidthRequest="100"-->
+                    <!--HorizontalOptions="Start"-->
+
+                <Button
+                    x:Name="BuyButton"
+                    Clicked="BuyButton_Clicked"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Text="Buy!"
+                />
+                <VerticalStackLayout
+                        Grid.Column="1"
+                        Grid.Row="1">
+
+                    <HorizontalStackLayout>
+
+                        <Label Text="Stock:" />
+
+                        <Label
+                            Text="In stock"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+
+                        <Label 
+                            Text="Price:" />
+                    
+                        <Label
+                            Text="{Binding Price}"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                
+            </Grid>
+
+
+        </Grid>
+    </Frame>
+</ContentView>

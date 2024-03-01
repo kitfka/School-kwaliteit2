@@ -1,75 +1,34 @@
-﻿# GitServer
+# Webshop
+[poging 2 branch](https://github.com/kitfka/School-kwaliteit2/tree/gitserver)
 
-## Fork
+## Omschrijving
+Dit is gemaakt door de Windesheim afstudeerder Philip Thuijs 
+Dit is een webshop applicatie gemaakt met .NET MAUI.
+Reverenties naar de VM zijn er uit gehaald en moet in ApiService.cs aangepast worden voor verder gebruik van de code.
 
-The base of this was this fork: https://github.com/kitfka/ASP.NET-Core-GitServer-fork
+## Installation
+Er zijn geen installers, volg de instructie hier onder.
 
-Why this repo instead of a fork?
-I am going to change a lot of code. (remove most of the js code) soo yeah.
+## Applicatie draaien
+Om de applicatie te draaien is het volgende nodig:
+- .NET 8 instalatie;
+- De correcte workloads;
+- .NET MAUI.
 
-
-## Overview
-
-Own ASP.NET Core 5.0 Git HTTP Server
-
-Setting
-
-```
-  "GitSettings": {
-    "BasePath": "E:\\GitServerRepos",
-    "GitPath": "git"
-  }
-```
-
-GitPath can be an absolute path to git like в Windows: **C:\Program Files\Git\bin\git.exe**
-
-Need to install [Git](https://git-scm.com/) first, and make sure the git command can be executed
-
-`git version`
-
-## Features
-
-### Сompleted
-
-- Create a repository
-- Browse the repository
-- git client: push pull
-- Supported Databases: SQLite | MSSQL | MySQL
-- User support for repositories
-
-## Development
-
-This is all the old stuff. it will be fine!
-
-`git clone https://github.com/InfDev/GitServer.git`
-
-Use VS 2017 15.9+ or VS Code 1.28+.
-
-If it is necessary to update client resources (folder _./GitServer/assets_), you must have the installed [node.js](https://nodejs.org/en/). Then, being in the repository folder, you need to run install the gulp-tools:
-
+Voor de .NET MAUI workloads gebruik het volgende command:
 ```cmd
-> cd ./GitServer
-> npm install
+dotnet workload install maui
 ```
 
-Client libraries (_semantic_ with _jquery_) can be upgraded to newer versions:
+De rest kan met de Visual Studio Installer geregeld worden.
 
-```cmd
-> bower install
-```
+## C4 model
 
-After changing your own client resources (js, css, img in assets folder), you must run:
+![c2](Docs/c2.jpg)
 
-```
-> npm run build
-```
+![C3 webshop Api](Docs/C3%20Webshop%20Api.jpg)
 
-## working principle
+![C3 webshop](Docs/C3%20Webshop.jpg)
 
-git client → GitServer → git server
-
-![](git-server-rpc-model.png)
-
-## License
-
-This project is under the [MIT License](LICENSE).
+## Authors and acknowledgment
+Philip Thuijs
